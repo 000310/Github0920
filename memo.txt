@@ -1,0 +1,32 @@
+working directoory  :   工作目錄
+staging area        :   索引
+Local Repository    :   本地數據庫
+Remote Repository   :   遠端數據庫
+VCS                 :   版本控制系统
+CVCS                :   集中化的版本控制系統  如TFS
+DVCS                :   分散式版本控制系统    如Git
+
+========================================
+1.git --version
+    檢查版本別，測試安裝是否成功。
+2.cd
+    普通cmd指令，可移動到指定資料夾位置，位置可用實體檔案拖曳方式。
+3.git config --global user.name "000310"
+    設定使用者名稱
+4.git config --global user.email "systemweb00031@gmail.com"
+    設定使用者Email
+5.git config --list
+    檢查Config內容
+6.git init
+    建立數據庫(儲存庫)
+    ※先確認cd已移動要建立數據庫(Repository)的位置再執行
+7.git status
+    確認目前資料夾內變化的狀態
+8.git add .
+    將資料新增到索引
+    ※「.」相當於這層資料夾的意思，就是全部
+    ※也可以add 檔名.副檔名
+9.git commit -m "註解"
+    將索引提交至本機數據庫
+10.
+
