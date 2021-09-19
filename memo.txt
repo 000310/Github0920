@@ -5,6 +5,11 @@ Remote Repository   :   遠端數據庫
 VCS                 :   版本控制系统
 CVCS                :   集中化的版本控制系統  如TFS
 DVCS                :   分散式版本控制系统    如Git
+Untracked           :   未追蹤
+UnModified          :   未修改
+Modified            :   已修改
+Staged              :   已加入索引
+
 
 ========================================
 1.git --version
@@ -28,5 +33,9 @@ DVCS                :   分散式版本控制系统    如Git
     ※也可以add 檔名.副檔名
 9.git commit -m "註解"
     將索引提交至本機數據庫
-10.
+10.git log
+    查看本機數據庫目前有哪些版本更新紀錄
+    ※退出按q
+11.
 
+test sourcetree
