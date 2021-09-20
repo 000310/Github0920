@@ -1,4 +1,4 @@
-working directoory  :   工作目錄
+working directory   :   工作目錄
 staging area        :   索引
 Local Repository    :   本地數據庫
 Remote Repository   :   遠端數據庫
@@ -38,4 +38,24 @@ Staged              :   已加入索引
     ※退出按q
 11.
 
-test sourcetree
+
+========================================
+[Remote & SSH Key](ToDo:現在觀念還不穩，先學好目標的Git再回頭來補SSH Key的知識)
+GitHub提供兩種遠端連線方式
+一、Https
+這種模式不需要產SSH，而是以網址的方式連上GitHub來存取遠端數據庫，當資料要Push時，會出現彈出視窗要求登入GitHub的帳密。
+(待確認)但不確是否因為GitHub的設定是公開還是SourceTree有紀錄自動驗證，使用SourceTree時沒有詢問帳密，或是登入過一次就不用再填了。
+
+二、SSH Key (http://zhengda.github.io/2016/05/05/git-puttykeyfile-兩三事/)
+利用產出公、私金鑰的方式來取代帳密登入，產出金鑰有兩種方法
+預設存放位置：C:\Users\Administrator\.ssh
+1.ssh-keygen
+GitHub官網教的是這種方法
+公鑰的檔名<檔名.pub> 例：id_ed25519.pub
+私鑰的檔名<檔名> 例：id_ed25519
+
+2.PuTTY Key
+SourceTree的Tool有提供產SSH Key的方法，產出來的叫PuTTY Key，產出(Generate)時需要不停移動滑鼠直到產生完畢。(可能是利用滑鼠軌跡來產生類似筆跡或指紋這樣不重複的Key)
+公鑰的檔名<檔名.pub> 例：id_ed25519.pub
+私鑰的檔名<檔名.ppk> 例：id_ed25519.ppk
+
