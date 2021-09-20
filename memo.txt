@@ -49,13 +49,16 @@ GitHub提供兩種遠端連線方式
 二、SSH Key (http://zhengda.github.io/2016/05/05/git-puttykeyfile-兩三事/)
 利用產出公、私金鑰的方式來取代帳密登入，產出金鑰有兩種方法
 預設存放位置：C:\Users\Administrator\.ssh
+Passphrase ：私鑰的密碼，可設可不設，有別於帳號的密碼是私鑰本身自己的密碼，有設定時在登入時須Key私鑰的密碼，安全性更高，避免私鑰被盜直接登入，缺點要記更多組密碼。
+
 1.ssh-keygen
 GitHub官網教的是這種方法
 公鑰的檔名<檔名.pub> 例：id_ed25519.pub
 私鑰的檔名<檔名> 例：id_ed25519
 
-2.PuTTY Key
+2.PuTTY Key(https://ithelp.ithome.com.tw/articles/10080136)
 SourceTree的Tool有提供產SSH Key的方法，產出來的叫PuTTY Key，產出(Generate)時需要不停移動滑鼠直到產生完畢。(可能是利用滑鼠軌跡來產生類似筆跡或指紋這樣不重複的Key)
+用這個產生的Key還要去設定開機時啟動pageant.exe還是SSH-agent啥的，目前是嘗試失敗，SSH Key本身就祐是一門知識。
 公鑰的檔名<檔名.pub> 例：id_ed25519.pub
 私鑰的檔名<檔名.ppk> 例：id_ed25519.ppk
 
