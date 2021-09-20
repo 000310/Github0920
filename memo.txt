@@ -1,7 +1,7 @@
 working directory   :   工作目錄
 staging area        :   索引
-Local Repository    :   本地數據庫
-Remote Repository   :   遠端數據庫
+Local Repository    :   本地數據庫(儲存庫)
+Remote Repository   :   遠端數據庫(儲存庫)
 VCS                 :   版本控制系统
 CVCS                :   集中化的版本控制系統  如TFS
 DVCS                :   分散式版本控制系统    如Git
@@ -17,8 +17,10 @@ Staged              :   已加入索引
 2.cd
     普通cmd指令，可移動到指定資料夾位置，位置可用實體檔案拖曳方式。
 3.git config --global user.name "000310"
+  git config --global user.name "使用者名稱"
     設定使用者名稱
 4.git config --global user.email "systemweb00031@gmail.com"
+  git config --global user.email "使用者Email"
     設定使用者Email
 5.git config --list
     檢查Config內容
@@ -33,16 +35,44 @@ Staged              :   已加入索引
     將資料新增到索引
     ※「.」相當於這層資料夾的意思，就是全部
     ※也可以add 檔名.副檔名
-9.git commit -m "註解"
-    將索引提交至本機數據庫
+9.git commit -m "新增文件"
+  git commit -m "註解內容comment等等"
+    將索引提交至本機數據庫，類似暫簽但意義不同
 10.git log
     查看本機數據庫目前有哪些版本更新紀錄
     ※退出按q
 11.git config --global alias.st status
     設定全域 自訂縮寫 st 等同 status。之後就可以下git st當作git stauts用。
-12.git remote add origin <遠端數據庫Https or SSH>
-    建立本機端數據庫連線(動詞)到遠端數據庫的連線(名詞)，詳見:[初始化遠端數據庫]二、本地端有數據庫
-13.
+12.git remote add origin https://github.com/000310/test.git
+12.git remote add <遠端數據庫的代稱> <遠端數據庫Https or SSH>
+    建立(註冊)本機端數據庫連線(動詞)到遠端數據庫的連線(名詞)，詳見:[初始化遠端數據庫]二、本地端有數據庫
+13.git branch -M main
+    在本地數據庫建立一條分支(branch)叫做main
+14.git push -u origin main
+   git push [-u] <遠端數據庫> <分支名稱>
+   git push
+    上傳(Push)本地數據庫至指定的遠端數據庫(origin)底下的分支(Main)。
+    使用過-u之後，只要用git push就會推到上次使用-u指令的遠端數據庫。
+15.git checkout 8cbd7e0
+   git checkout <commit編號>
+    跳到指定的commit節點，類似GetSpecialCode。
+   git checkout master
+    回到master所在的commit節點，等同回到最新的狀態。
+   git checkout -- <檔案名稱>
+    還原目前修改的檔案，相當於Undo，取得指定檔案覆寫現有檔案
+16.git clean -n
+    查詢可刪除本地數據庫中未追蹤的檔案清單
+    (不常用指令)
+17.git clean -f
+    刪除本地數據庫中未追蹤的檔案，搭配checkout master可以讓資料夾內的結構、檔案狀態完全同最後一版
+    (不常用指令)
+18.git reset HEAD
+    將加入索引的檔案還原到工作目錄。
+19.
+
+
+
+
 
 ================================================================================
 [初始化遠端數據庫]
@@ -56,7 +86,8 @@ git branch -M main      分支(Branch)出一條主線(-M)取名為main(主線本
 
 二、本地端有數據庫
 git remote add origin <遠端數據庫Https or SSH>               遠端指令(remote)，新增(add)一條遠端連線，該連線取名為"origin"，對應的URL為<遠端數據Https or SSH>
-git push -u origin main                                      上傳(Push) -u(ToDo:等學完分支合併後再來補充，set-upstream的意思)，指定更新的遠端數據庫為origin底下的Main分支
+git branch -M main                                           建立一條分支(branch)叫做main
+git push -u origin main                                      上傳(Push) -u(set-upstream的意思，用途設定"預設"Push到哪個遠端數據庫)，指定更新的遠端數據庫為origin底下的Main分支
 
 ※根據cd的位置判斷同一個本地端數據庫可以連線到多個遠端數據庫，但是連線的對應名稱不可重複
 本地數據庫      |對應名稱(存在.git/Config裡)     |遠端數據庫    |用途
@@ -85,7 +116,7 @@ GitHub提供兩種遠端連線方式
 二、SSH Key (http://zhengda.github.io/2016/05/05/git-puttykeyfile-兩三事/)
 利用產出公、私金鑰的方式來取代帳密登入，產出金鑰有兩種方法
 預設存放位置：C:\Users\Administrator\.ssh
-Passphrase ：私鑰的密碼，可設可不設，有別於帳號的密碼是私鑰本身自己的密碼，有設定時在登入時須Key私鑰的密碼，安全性更高，避免私鑰被盜直接登入，缺點要記更多組密碼。
+Passphrase ：私鑰的密碼，可設可不設，有別於帳號的密碼是私鑰本身自己的密碼，至少9碼，有設定時在登入時須Key私鑰的密碼，安全性更高，避免私鑰被盜直接登入，缺點要記更多組密碼。
 
 1.ssh-keygen
 GitHub官網教的是這種方法
