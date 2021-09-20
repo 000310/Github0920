@@ -22,9 +22,11 @@ Staged              :   已加入索引
     設定使用者Email
 5.git config --list
     檢查Config內容
+    ※Config存在 C:\Users\<使用者名稱>\.gitconfig 內。
 6.git init
     建立數據庫(儲存庫)
     ※先確認cd已移動要建立數據庫(Repository)的位置再執行
+    在本地端執行就是建立本地數據庫，在GitHub上New Repository就是相當於在GitHub這台伺服器上執行git init，產生遠端數據庫。
 7.git status
     確認目前資料夾內變化的狀態
 8.git add .
@@ -36,10 +38,44 @@ Staged              :   已加入索引
 10.git log
     查看本機數據庫目前有哪些版本更新紀錄
     ※退出按q
-11.
+11.git config --global alias.st status
+    設定全域 自訂縮寫 st 等同 status。之後就可以下git st當作git stauts用。
+12.git remote add origin <遠端數據庫Https or SSH>
+    建立本機端數據庫連線(動詞)到遠端數據庫的連線(名詞)，詳見:[初始化遠端數據庫]二、本地端有數據庫
+13.
 
+================================================================================
+[初始化遠端數據庫]
+建立遠端數據庫後有兩種方法初始化
+以下以GitHub New Repository 取名test為例
+一、本地端無數據庫
+(先cd到目標資料夾)
+git init                本地端建立並初始化一個數據庫(產生.git資料夾)
+git branch -M main      分支(Branch)出一條主線(-M)取名為main(主線本身也是一條支線，而其他支線則是由主線再切出來的分支)
+接著走下面，有本地數據庫的操作
 
-========================================
+二、本地端有數據庫
+git remote add origin <遠端數據庫Https or SSH>               遠端指令(remote)，新增(add)一條遠端連線，該連線取名為"origin"，對應的URL為<遠端數據Https or SSH>
+git push -u origin main                                      上傳(Push) -u(ToDo:等學完分支合併後再來補充，set-upstream的意思)，指定更新的遠端數據庫為origin底下的Main分支
+
+※根據cd的位置判斷同一個本地端數據庫可以連線到多個遠端數據庫，但是連線的對應名稱不可重複
+本地數據庫      |對應名稱(存在.git/Config裡)     |遠端數據庫    |用途
+桌面\project    |origin                          |Github0920    |正式區伺服器
+桌面\project    |test                            |test          |測試區伺服器
+桌面\project    |bit                             |Github0920    |在Bitbucket正式區伺服器
+桌面\project2   |origin                          |project2      |別的伺服器
+(TFS是像一個大哥底下幾個小弟，小弟底下又有其他小弟，像樹狀圖一樣，
+ 但是Git可以一個小弟有多的大哥，類似Host，
+ 只要網域名取的不一樣，可以指向相同IP或不同IP，
+ 但Git限制不可以一個網域名對應到多個IP，所以對應名稱不能重複
+)
+
+[README.md]
+補充說明README文件
+在GitHub、GitLab、Bitbucket上新增數據庫時都會問你要不要產生這個檔案
+功用是類似於協同作業的公告，檔案採用.md的格式，可用於說明這個專案是幹嘛的或當作更新改版的紀錄及協同作業的注意事項等等。
+好比建一個 說明.txt，所以此檔案可加可不加，通常是不用加，但與陌生人協作可能有用。
+================================================================================
 [Remote & SSH Key](ToDo:現在觀念還不穩，先學好目標的Git再回頭來補SSH Key的知識)
 GitHub提供兩種遠端連線方式
 一、Https
