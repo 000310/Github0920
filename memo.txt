@@ -9,8 +9,9 @@ Untracked           :   未追蹤
 UnModified          :   未修改
 Modified            :   已修改
 Staged              :   已加入索引
-
-
+HEAD                :   目前使用的commit節點或分支
+快轉                :   目前分支的commit節點因Merge往下個commit節點前進
+master              :   預設的分支名稱
 ========================================
 1.git --version
     檢查版本別，測試安裝是否成功。
@@ -37,27 +38,29 @@ Staged              :   已加入索引
     ※也可以add 檔名.副檔名
 9.git commit -m "新增文件"
   git commit -m "註解內容comment等等"
-    將索引提交至本機數據庫，類似暫簽但意義不同
+    將索引提交至本機數據庫，類似暫簽但意義不同，相當於本地端的簽入。
 10.git log
     查看本機數據庫目前有哪些版本更新紀錄
     ※退出按q
 11.git config --global alias.st status
     設定全域 自訂縮寫 st 等同 status。之後就可以下git st當作git stauts用。
+
+
 12.git remote add origin https://github.com/000310/test.git
-12.git remote add <遠端數據庫的代稱> <遠端數據庫Https or SSH>
+   git remote add <遠端數據庫的代稱> <遠端數據庫Https or SSH>
     建立(註冊)本機端數據庫連線(動詞)到遠端數據庫的連線(名詞)，詳見:[初始化遠端數據庫]二、本地端有數據庫
 13.git branch -M main
     在本地數據庫建立一條分支(branch)叫做main
 14.git push -u origin main
    git push [-u] <遠端數據庫> <分支名稱>
    git push
-    上傳(Push)本地數據庫至指定的遠端數據庫(origin)底下的分支(Main)。
+    上傳(Push)本地數據庫至指定的遠端數據庫(origin)底下的分支(Main)，相當於Merge、遠端的簽入。
     使用過-u之後，只要用git push就會推到上次使用-u指令的遠端數據庫。
 15.git checkout 8cbd7e0
    git checkout <commit編號>
-    跳到指定的commit節點，類似GetSpecialCode。
+    跳到指定的commit節點，HEAD也會指向該commit節點，SorceTree上的動作是點兩下該commit節點，類似GetSpecialCode。
    git checkout master
-    回到master所在的commit節點，等同回到最新的狀態。
+    取得master所在的commit節點，等同回到最新的狀態。詳見:第20的語法
    git checkout -- <檔案名稱>
     還原目前修改的檔案，相當於Undo，取得指定檔案覆寫現有檔案
 16.git clean -n
@@ -68,10 +71,46 @@ Staged              :   已加入索引
     (不常用指令)
 18.git reset HEAD
     將加入索引的檔案還原到工作目錄。
-19.
 
 
+19.git branch develop
+   git branch <新分支名稱>
+    建立新的分支
+   git branch
+    查看目前所有的分支，q 離開畫面。
+   *git branch -d <分支名稱>
+    刪除分支
+   *git branch -D <分支名稱>
+    強制刪除分支
+   *git branch <新分支名稱> commit <commit編號)
+    給指定commit節點產生分支。
+20.git checkout develop
+   git checkout <分支名稱>
+    切換使用的分支，同時檔案狀態會切到該分支的commit，HEAD 也會跟著指向到該分支。
 
+21.git merge develop
+   git merge <目標分支>
+    使將目前的分支產生同目標分支一樣的commit節點，等同目前分支重複目標分支所做過的一切動作，如同快轉一樣，故也稱快轉、快進式Merge。
+    例：
+        假設目前有4個commit，X = 目前分支； Y = 目標分支
+        X = 節點3； Y = 節點4
+        HEAD => X (HEAD指向X)
+        執行完git merger Y後 HEAD => X = 節點4 = Y
+    以SW為例，如同開發線改完了，主線自己也重做一樣的程式碼簽出、調整並簽入，
+        測試線有多少筆ChangeSet，正式區就簽出、簽入幾次。
+22.git merge develop --no-ff
+   git merge <目標分支> --no-ff
+    取消快轉機制的Merge，會再產生一個commit節點，此節點表示兩邊分支的差異及同步並將兩邊分支的位置到最新的節點上，
+        因為是新產生的commit節點，所以會要求輸入註解說明(Comment)。
+    以SW為例，如同一般TFS上的Merge作法，開發線多筆的ChangeSet Merge到主線時，
+        主線的檔案會呈現多個檔案的簽出並一次性簽入，產出1筆ChangeSet，
+        該筆ChangeSet會記錄中間的所有差異(調整)。
+*23.git log -online -graph
+    觀看線圖
+*24.git reset -hard ORIG_HEAD
+    還原合併前狀態
+*25.git merge --abort
+    取消merge衝突狀態
 
 
 ================================================================================
